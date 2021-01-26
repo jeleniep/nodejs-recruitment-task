@@ -4,7 +4,9 @@ import axios from "axios"
 
 class MovieDataService {
   static getMovieData = (apiUrl, apiKey) => async (title) => {
-
+    if (!apiUrl || !apiUrl) {
+      return undefined;
+  }
     const API = axios.create({
       baseURL: apiUrl,
       params: {
