@@ -13,11 +13,7 @@ const checkUserCredits = async (user) => {
 }
 
 const addMovie = (apiUrl, apiKey) => async (req, res, next) => {
-    if (!apiUrl || !apiUrl) {
-        return undefined;
-    }
-    
-    if (!req.body) {
+     if (!req.body) {
         return res.status(400).json({ error: "invalid payload" });
     }
 

@@ -43,7 +43,7 @@ describe("Movies test", () => {
 
   test("Test if basic user could add at most 5 movies.", async () => {
     let response;
-    const titles = ["Tom&Jerry", "Go", "Makbet", "Potop", "It"]
+    const titles = ["Tom&Jerry", "Go", "Makbet", "Potop", "It", "Sharknado"]
     for (const title of titles) {
       let request = httpMocks.createRequest({
         method: 'POST',
