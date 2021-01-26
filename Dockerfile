@@ -1,4 +1,4 @@
-FROM node:14.15-alpine
+FROM node:15.6-alpine
 
 WORKDIR /app
 
@@ -8,4 +8,4 @@ RUN npm install
 RUN mkdir ./src
 COPY ./src ./src
 
-CMD ["node", "./src/server.js"]
+CMD ["node", "./dist/server.js"]

@@ -1,0 +1,176 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Movies API'
+  description: 'Movies API for Netguru'
+host: localhost
+basePath: /
+schemes:
+ - http
+tags:
+  - name: Movies
+  - name: Auth
+
+paths:
+  /movies:
+    get:
+      tags:
+      - Movies
+      summary: Searches all user movies
+      operationId: searchMovies
+      description: |
+        Searches all user movies.
+      produces:
+      - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: User JWT
+          type: string
+      responses:
+        200:
+          description: All user movies
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Movie'
+        403:
+          description: User not authorized
+
+    post:
+      tags:
+      - Movies
+      summary: Add a movie
+      operationId: addMovie
+      description: Add new movie
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: Authorization
+        description: User token
+        type: string
+      - in: body
+        name: title
+        description: MovieTitle
+        schema:
+          $ref: '#/definitions/NewMovie'
+      responses:
+        200:
+          description: movie added successfully
+          schema:
+            type: object
+            properties:
+              status: 
+                  type: string
+                  example: Movie added successfully.
+        400:
+          description: invalid payload
+          schema:
+            type: object
+            properties:
+              error: 
+                  type: string
+                  example: invalid payload 
+        401:
+          description: user not authorized
+          schema:
+            type: object
+            properties:
+              error: 
+                  type: string
+                  example: User not authorized          
+        403:
+          description:  not enough credits
+          schema:
+            type: object
+            properties:
+              error: 
+                  type: string
+                  example: You don't have enough credits to add new movie
+          
+  /auth:
+    post:
+      tags:
+      - Auth
+      summary: User authorization
+      operationId: authUser
+      description: Authorize an user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: AuthData
+        description: Username and password
+        schema:
+          $ref: '#/definitions/AuthData'
+      responses:
+        200:
+          description: user authorized
+          schema:
+            type: object
+            properties:
+              error: 
+                  type: string
+                  example: eyjasdasdasldkjaskldjasdlkjioj123145
+        401:
+          description: user unauthorized
+          schema:
+            type: object
+            properties:
+              error: 
+                  type: string
+                  example: invalid username or password
+
+
+                  
+
+definitions:
+  AuthData:
+    type: object
+    required:
+    - username
+    - password
+    properties:
+      username:
+        type: string
+        example: username
+      password: 
+        type: string
+        example: strongPassword   
+  
+  NewMovie:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+        example: Harry Potter
+
+  Movie:
+    type: object
+    required:
+    - title
+    - _id
+    properties:
+      title:
+        type: string
+        example: Harry Potter
+      _id: 
+        type: string
+        example: 600ed98fe9004b01be287843 
+      fullTitle: 
+        type: string
+        example: Harry Potter and the Deathly Hallows Part 2   
+      genre: 
+        type: string
+        example: Animation, Action, Adventure, Comedy, Family, Fantasy 
+      director: 
+        type: string
+        example: Christopher Miller, Phil Lord  
+

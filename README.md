@@ -1,5 +1,5 @@
 # Node.js recruitment task
-
+API docs page: https://app.swaggerhub.com/apis-docs/pje/MovieApi/1.0.0-oas3
 We'd like you to build a simple Movie API. It should provide two endpoints:
 
 1. `POST /movies`
